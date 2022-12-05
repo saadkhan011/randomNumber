@@ -9,8 +9,7 @@ app.use(express.static('public'))
 var readDate = fs.readFileSync(__dirname + '/date.txt', 'utf-8');
 console.log(readDate);
 const d = new Date();
-const dateNow = `${d.getUTCDate()} ${d.getUTCMonth()} ${d.getUTCFullYear()}`;
-// const dateNow = `${d.setUTCDate(29)} ${d.setUTCMonth(11)} ${d.setUTCFullYear(2022)}`;
+const dateNow = d.toDateString();
 function writeData(text) {
     fs.appendFile(__dirname + '/number.txt', text + "\n", function (err) {
         if (err) throw err;
@@ -39,7 +38,7 @@ readNumber.on('line', (line) => {
     array[i] = line;
     i++;
 });
-const datefordisplay = `${d.getUTCDate()}-${d.getUTCMonth()}-${d.getUTCFullYear()}`;
+const datefordisplay = d.toDateString();
 app.get('/', function (req, res) {
     res.render("index", { value1: array[0], value2: array[1], value3: array[2], value4: array[3], date: datefordisplay })
 })
